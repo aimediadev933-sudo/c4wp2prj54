@@ -1,1 +1,1632 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web & Application Security Training for NREN Professionals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #F28C28;
+            --secondary: #E88C2D;
+            --body: #FCF5EC;
+            --text: #1D1D1B;
+            --secondary-dark: #9F4B14;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,149.3L1200,139L1200,320L1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center/cover no-repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Logos Section */
+        .logos {
+            background: var(--white);
+            padding: 60px 0;
+        }
+
+        .logos-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            max-width: 200px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            filter: grayscale(0.3);
+        }
+
+        .logo-item:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+            filter: grayscale(0);
+        }
+
+        .logo-item img {
+            width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(242, 140, 40, 0.2);
+        }
+
+        /* Training Focus */
+        .training-focus {
+            background: var(--body);
+            text-align: center;
+        }
+
+        .training-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 3px solid var(--primary);
+        }
+
+        .training-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: securityPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes securityPulse {
+            0%, 100% { 
+                transform: scale(1);
+                color: var(--primary);
+                filter: drop-shadow(0 0 10px rgba(242, 140, 40, 0.3));
+            }
+            50% { 
+                transform: scale(1.1);
+                color: var(--secondary);
+                filter: drop-shadow(0 0 20px rgba(242, 140, 40, 0.6));
+            }
+        }
+
+        .training-card h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .training-details {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            color: var(--secondary-dark);
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Activities Section */
+        .activities {
+            background: var(--body);
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .activity-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(242, 140, 40, 0.15);
+        }
+
+        .activity-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Security Topics */
+        .topics {
+            background: var(--white);
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .topic-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid var(--secondary);
+        }
+
+        .topic-card:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .topic-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .topic-card:hover .topic-icon {
+            color: var(--white);
+        }
+
+        /* Beneficiaries Section */
+        .beneficiaries {
+            background: var(--body);
+        }
+
+        .beneficiaries-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .beneficiaries-info {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .beneficiaries-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .country-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .country-card:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .country-flag {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .country-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Gender Section */
+        .gender {
+            background: var(--white);
+        }
+
+        .gender-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .gender-info {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .gender-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .gender-stats {
+            text-align: center;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .gender-breakdown {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+        }
+
+        .gender-item {
+            text-align: center;
+        }
+
+        .gender-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .gender-label {
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        /* Partners Section */
+        .partners {
+            background: var(--body);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .partner-card {
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .partner-card:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+
+        .partner-card h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Outcomes Section */
+        .outcomes {
+            background: var(--white);
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .outcome-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .outcome-card:hover {
+            transform: translateY(-5px);
+            background: var(--white);
+        }
+
+        .outcome-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .outcome-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Platforms Section */
+        .platforms {
+            background: var(--body);
+        }
+
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .platform-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(242, 140, 40, 0.2);
+        }
+
+        .platform-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .platform-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .platform-link {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .platform-link:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* SDGs Section */
+        .sdgs {
+            background: var(--white);
+        }
+
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .sdg-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .sdg-card:hover {
+            transform: translateY(-5px);
+            background: var(--white);
+        }
+
+        .sdg-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .logos-grid {
+                gap: 3rem;
+            }
+            
+            .logo-item {
+                max-width: 180px;
+            }
+            
+            .beneficiaries-wrapper, .gender-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .activities-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .topics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .partners-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            
+            .countries-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+            
+            .outcomes-grid, .platforms-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .sdg-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .logos-grid {
+                gap: 2rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .logo-item {
+                max-width: 150px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .gender-breakdown {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .activity-card, .sdg-card, .topic-card, .outcome-card, .platform-card {
+                padding: 1.5rem;
+            }
+            
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            
+            .logo-item {
+                max-width: 120px;
+            }
+            
+            .logo-item img {
+                max-height: 60px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .training-icon {
+                font-size: 4rem;
+            }
+            
+            .country-flag {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(242, 140, 40, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(242, 140, 40, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(242, 140, 40, 0);
+            }
+        }
+
+        .cta-button {
+            animation: pulse 2s infinite;
+        }
+
+        /* Floating animation */
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .floating {
+            animation: floating 4s ease-in-out infinite;
+        }
+
+        /* Slide animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease forwards;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease forwards;
+        }
+
+        /* Web security animation */
+        @keyframes webSecurityPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(242, 140, 40, 0.4);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 0 0 15px rgba(242, 140, 40, 0);
+            }
+        }
+
+        .web-security-pulse {
+            animation: webSecurityPulse 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">WebSec</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#training">Training</a></li>
+                <li><a href="#stats">Statistics</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#topics">Topics</a></li>
+                <li><a href="#countries">Countries</a></li>
+                <li><a href="#gender">Gender Focus</a></li>
+                <li><a href="#platforms">Platforms</a></li>
+                <li><a href="#outcomes">Outcomes</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>Web Security Training</h1>
+                <div class="subtitle">For NREN Professionals</div>
+                <p>Hands-on training on fundamental web and application security issues for National Research and Education Networks professionals across seven least developed Asian countries, building critical cybersecurity capabilities and resilient digital infrastructures.</p>
+                <a href="#about" class="cta-button">Explore Our Training</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="logos">
+        <div class="container">
+            <div class="logos-grid">
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/asia-connect-logo.png" alt="Asia Connect" />
+                </div>
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/eu-logo.png" alt="European Union" />
+                </div>
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/tein-logo.png" alt="TEIN Cooperation Center" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About Our Program</h2>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll slide-in-left">
+                    <p>This project addressed the urgent need for enhanced cybersecurity capabilities within the National Research and Education Networks (NRENs) of seven least developed Asian countries. Through a series of three online hands-on workshops, we equipped 96 IT professionals with critical knowledge and skills to identify, mitigate, and manage web and application security threats.</p>
+                    <p>Led by the University of Dhaka, the initiative aimed to build resilient and secure digital infrastructures in academic institutions, while also promoting regional collaboration and gender inclusion in the cybersecurity domain.</p>
+                </div>
+                <div class="highlight animate-on-scroll slide-in-right">
+                    <h3>Our Mission</h3>
+                    <p>To enhance web and application security capacity among NREN professionals in LDC countries through hands-on training, building technical expertise and promoting inclusive participation in cybersecurity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="training" class="section training-focus">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Training Focus</h2>
+            <div class="training-card animate-on-scroll floating web-security-pulse">
+                <div class="training-icon">🔐</div>
+                <h3>15-Day Online Security Training</h3>
+                <p>Comprehensive hands-on training program delivered through three 5-day virtual workshops focusing on OWASP Top 10, TLS, risk frameworks, and security testing for NREN professionals.</p>
+                <div class="training-details">96 Professionals • 7 Countries • June 15-30, 2021</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" class="section stats">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Training Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card animate-on-scroll web-security-pulse">
+                    <div class="stat-number">96</div>
+                    <div class="stat-label">IT Professionals Trained</div>
+                </div>
+                <div class="stat-card animate-on-scroll web-security-pulse">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">LDC Countries</div>
+                </div>
+                <div class="stat-card animate-on-scroll web-security-pulse">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Workshop Sessions</div>
+                </div>
+                <div class="stat-card animate-on-scroll web-security-pulse">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Training Days</div>
+                </div>
+                <div class="stat-card animate-on-scroll web-security-pulse">
+                    <div class="stat-number">31</div>
+                    <div class="stat-label">Female Participants</div>
+                </div>
+                <div class="stat-card animate-on-scroll web-security-pulse">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">LMS Access</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="section activities">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key Activities</h2>
+            <div class="activities-grid">
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">🎯</div>
+                    <h3>Planning and Workshop Design</h3>
+                    <p>Designed comprehensive 15-day training curriculum focused on OWASP Top 10, TLS, risk frameworks, and security testing through expert consultations.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">💻</div>
+                    <h3>LMS and Website Development</h3>
+                    <p>Developed dedicated LMS platform and public website for content dissemination, training access, and registration management.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">🎓</div>
+                    <h3>Online Training Sessions</h3>
+                    <p>Conducted three 5-day virtual workshops training 96 participants from 7 countries using interactive Zoom and LMS platforms.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">👥</div>
+                    <h3>Trainer and Participant Coordination</h3>
+                    <p>Engaged experts from academia and industry including international trainers from UK and China, coordinated through NREN focal points.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">📢</div>
+                    <h3>Visibility and Engagement</h3>
+                    <p>Organized opening/closing ceremonies, media coverage, training kits distribution, and comprehensive feedback surveys for engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="topics" class="section topics">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Security Topics Covered</h2>
+            <div class="topics-grid">
+                <div class="topic-card animate-on-scroll">
+                    <div class="topic-icon">🔟</div>
+                    <h3>OWASP Top 10</h3>
+                    <p>Critical web application vulnerabilities</p>
+                </div>
+                <div class="topic-card animate-on-scroll">
+                    <div class="topic-icon">🔒</div>
+                    <h3>TLS Security</h3>
+                    <p>Transport Layer Security protocols</p>
+                </div>
+                <div class="topic-card animate-on-scroll">
+                    <div class="topic-icon">⚖️</div>
+                    <h3>Risk Frameworks</h3>
+                    <p>Security risk assessment methodologies</p>
+                </div>
+                <div class="topic-card animate-on-scroll">
+                    <div class="topic-icon">🧪</div>
+                    <h3>Security Testing</h3>
+                    <p>Vulnerability assessment and penetration testing</p>
+                </div>
+                <div class="topic-card animate-on-scroll">
+                    <div class="topic-icon">🌐</div>
+                    <h3>Web Vulnerabilities</h3>
+                    <p>Common web application security flaws</p>
+                </div>
+                <div class="topic-card animate-on-scroll">
+                    <div class="topic-icon">📱</div>
+                    <h3>Application Security</h3>
+                    <p>Secure coding and application hardening</p>
+                </div>
+                <div class="topic-card animate-on-scroll">
+                    <div class="topic-icon">🛡️</div>
+                    <h3>Security Controls</h3>
+                    <p>Implementation of security measures</p>
+                </div>
+                <div class="topic-card animate-on-scroll">
+                    <div class="topic-icon">🔍</div>
+                    <h3>Threat Analysis</h3>
+                    <p>Identifying and analyzing security threats</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="countries" class="section beneficiaries">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Beneficiary Countries</h2>
+            <div class="beneficiaries-wrapper">
+                <div class="beneficiaries-info animate-on-scroll slide-in-left">
+                    <h3>LDC Focus</h3>
+                    <p><strong>Target:</strong> Seven Least Developed Asian Countries</p>
+                    <p><strong>Participants:</strong> NREN professionals and network engineers</p>
+                    <p><strong>Approach:</strong> Online hands-on workshops with gender inclusion</p>
+                    <p>The program specifically targeted professionals from National Research and Education Networks in least developed countries, addressing the urgent need for enhanced cybersecurity capabilities in academic and research institutions.</p>
+                </div>
+                <div class="countries-grid animate-on-scroll slide-in-right">
+                    <div class="country-card">
+                        <div class="country-flag">🇧🇩</div>
+                        <div class="country-name">Bangladesh</div>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇦🇫</div>
+                        <div class="country-name">Afghanistan</div>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇧🇹</div>
+                        <div class="country-name">Bhutan</div>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇲🇲</div>
+                        <div class="country-name">Myanmar</div>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇳🇵</div>
+                        <div class="country-name">Nepal</div>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇱🇰</div>
+                        <div class="country-name">Sri Lanka</div>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇻🇳</div>
+                        <div class="country-name">Vietnam</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gender" class="section gender">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Gender Inclusion Initiative</h2>
+            <div class="gender-wrapper">
+                <div class="gender-info animate-on-scroll slide-in-left">
+                    <h3>Women Empowerment in Cybersecurity</h3>
+                    <p>Our program prioritized gender inclusion with dedicated efforts to engage female professionals in cybersecurity training. Despite challenges in some regions, we successfully trained 31 women, including a dedicated women-focused session.</p>
+                    <p>This initiative represents a significant step toward building gender-diverse cybersecurity capacity in the NREN community across least developed countries.</p>
+                </div>
+                <div class="gender-stats animate-on-scroll slide-in-right">
+                    <h3>Participation Breakdown</h3>
+                    <div class="gender-breakdown">
+                        <div class="gender-item">
+                            <div class="gender-number">31</div>
+                            <div class="gender-label">Female Participants</div>
+                        </div>
+                        <div class="gender-item">
+                            <div class="gender-number">65</div>
+                            <div class="gender-label">Male Participants</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--primary); font-weight: bold;">32% Female Participation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="platforms" class="section platforms">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Digital Training Platforms</h2>
+            <div class="platforms-grid">
+                <div class="platform-card animate-on-scroll">
+                    <div class="platform-icon">📚</div>
+                    <h3>Learning Management System</h3>
+                    <p>Dedicated LMS platform providing 24/7 access to training content, resources, and interactive learning materials for all participants.</p>
+                    <a href="https://lms.iit.du.ac.bd/" class="platform-link" target="_blank">Visit LMS</a>
+                </div>
+                <div class="platform-card animate-on-scroll">
+                    <div class="platform-icon">🌐</div>
+                    <h3>Public Website</h3>
+                    <p>Comprehensive public website for project information, registration management, updates, and resource sharing with the broader community.</p>
+                    <a href="https://was.bdren.net.bd/" class="platform-link" target="_blank">Visit Website</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="outcomes" class="section outcomes">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key Outcomes</h2>
+            <div class="outcomes-grid">
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">👨‍💻</div>
+                    <h3>Skilled Workforce Development</h3>
+                    <p>Successfully trained 96 IT professionals in core web and application security skills across seven least developed countries.</p>
+                </div>
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">💻</div>
+                    <h3>Digital Training Infrastructure</h3>
+                    <p>Established LMS and digital resources accessible 24/7 for future use and continuous learning by NREN professionals.</p>
+                </div>
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">👩‍💻</div>
+                    <h3>Women Empowerment</h3>
+                    <p>Trained 31 women in cybersecurity, including a dedicated women-focused session to promote gender inclusion.</p>
+                </div>
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">🤝</div>
+                    <h3>Collaborative Cybersecurity Culture</h3>
+                    <p>Enhanced international cooperation through shared knowledge among 7 NREN regions in cybersecurity practices.</p>
+                </div>
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">🏗️</div>
+                    <h3>Reusable Training Platform</h3>
+                    <p>Created sustainable infrastructure for future NREN-led training programs and continuous capacity building.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="section partners">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Partner Organizations</h2>
+            <div class="partners-grid">
+                <div class="partner-card animate-on-scroll">
+                    <h4>Institute of Information Technology</h4>
+                    <p>IIT, University of Dhaka - Lead Partner</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>Patuakhali Science and Technology University</h4>
+                    <p>PSTU - Implementation Partner</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>Bangladesh Research and Education Network</h4>
+                    <p>BdREN - Network Partner</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>TEIN*CC</h4>
+                    <p>Trans-Eurasia Information Network Coordination Center</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="section sdgs">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Sustainable Development Goals</h2>
+            <div class="sdg-grid">
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">4</div>
+                    <h3>Quality Education</h3>
+                    <p>Enhancing technical education and cybersecurity capacity building for IT professionals in least developed countries.</p>
+                </div>
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">5</div>
+                    <h3>Gender Equality</h3>
+                    <p>Promoting women's participation in cybersecurity through dedicated training sessions and inclusive recruitment strategies.</p>
+                </div>
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">9</div>
+                    <h3>Industry, Innovation and Infrastructure</h3>
+                    <p>Building resilient digital infrastructure through enhanced web and application security capabilities in NRENs.</p>
+                </div>
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">17</div>
+                    <h3>Partnerships for the Goals</h3>
+                    <p>Strengthening international partnerships for cybersecurity capacity building and knowledge sharing across regions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Web Security Training</h3>
+                    <p>Hands-on Training on Fundamental Web and Application Security Issues for NREN Professionals</p>
+                    <p>Category: WP2 - 4th Call</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#about">About</a>
+                    <a href="#training">Training</a>
+                    <a href="#stats">Statistics</a>
+                    <a href="#activities">Activities</a>
+                    <a href="#topics">Topics</a>
+                    <a href="#countries">Countries</a>
+                    <a href="#gender">Gender Focus</a>
+                    <a href="#platforms">Platforms</a>
+                    <a href="#outcomes">Outcomes</a>
+                    <a href="#partners">Partners</a>
+                    <a href="#impact">Impact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Digital Platforms</h3>
+                    <a href="https://lms.iit.du.ac.bd/" target="_blank">Learning Management System</a>
+                    <a href="https://was.bdren.net.bd/" target="_blank">Project Website</a>
+                    <p>96 Professionals Trained</p>
+                    <p>7 LDC Countries Reached</p>
+                </div>
+            </div>
+            <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 2rem 0;">
+            <p>&copy; 2025 Web Security Training Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(242, 140, 40, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Stats counter animation
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.stat-number, .gender-number');
+            
+            counters.forEach(counter => {
+                const target = counter.textContent.includes('/') ? 
+                    counter.textContent : 
+                    parseInt(counter.textContent.replace(/,/g, ''));
+                
+                if (typeof target === 'number') {
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString();
+                        }
+                    };
+                    
+                    updateCounter();
+                }
+            });
+        };
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Gender stats animation
+        const genderStatsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const genderNumbers = entry.target.querySelectorAll('.gender-number');
+                    genderNumbers.forEach(number => {
+                        const target = parseInt(number.textContent);
+                        let current = 0;
+                        const increment = target / 60;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                number.textContent = target;
+                                clearInterval(timer);
+                            } else {
+                                number.textContent = Math.floor(current);
+                            }
+                        }, 30);
+                    });
+                    
+                    genderStatsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const genderSection = document.querySelector('.gender');
+        if (genderSection) {
+            genderStatsObserver.observe(genderSection);
+        }
+
+        // Add staggered animation delays to cards
+        const addStaggeredAnimations = () => {
+            const cardGroups = [
+                '.activities-grid .activity-card',
+                '.topics-grid .topic-card',
+                '.outcomes-grid .outcome-card',
+                '.partners-grid .partner-card',
+                '.stats-grid .stat-card',
+                '.countries-grid .country-card',
+                '.platforms-grid .platform-card'
+            ];
+
+            cardGroups.forEach(selector => {
+                const cards = document.querySelectorAll(selector);
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.05}s`;
+                });
+            });
+        };
+
+        // Initialize staggered animations when page loads
+        window.addEventListener('load', addStaggeredAnimations);
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.3;
+            
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Add typing effect to hero title
+        const typeWriter = (element, text, delay = 80) => {
+            element.textContent = '';
+            let i = 0;
+            
+            const timer = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, delay);
+        };
+
+        // Initialize typing effect
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                const originalText = heroTitle.textContent;
+                setTimeout(() => {
+                    typeWriter(heroTitle, originalText, 150);
+                }, 500);
+            }
+        });
+
+        // Add web security visualization effect
+        const createWebSecurityEffect = () => {
+            const securityCards = document.querySelectorAll('.web-security-pulse');
+            securityCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(1.03)';
+                    card.style.boxShadow = '0 0 25px rgba(242, 140, 40, 0.4)';
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1)';
+                        card.style.boxShadow = '';
+                    }, 400);
+                }, index * 150);
+            });
+        };
+
+        // Trigger security effect when training section becomes visible
+        const securityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(createWebSecurityEffect, 1000);
+                    securityObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const trainingSection = document.querySelector('.training-focus');
+        if (trainingSection) {
+            securityObserver.observe(trainingSection);
+        }
+
+        // Add dynamic gradient animation to hero
+        let gradientPosition = 0;
+        setInterval(() => {
+            gradientPosition += 0.3;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.background = `linear-gradient(${135 + gradientPosition}deg, var(--primary) 0%, var(--secondary) 100%)`;
+            }
+        }, 100);
+    </script>
+</body>
+</html>
